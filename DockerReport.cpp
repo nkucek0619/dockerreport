@@ -14,6 +14,7 @@
 #include <string>
 #include <algorithm>
 #include <sstream>
+
 int main() {
     bool invalue = false;
     bool inversion = false;

@@ -37,3 +37,20 @@ std::string::const_iterator parseKey(std::string::const_iterator pc, std::string
 
 	    return pc;
 }
+
+//parse a YAML value
+std::string::const_iterator parseValue(std::string::const_iterator pc, std::string::const_iterator endpc, std::string& value, bool& invalue){
+	    auto endpc = buffer.cend();
+        pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
+        if (*pc == '"')
+            std::advance(pc, 1);
+        auto valueend = std::find_if(pc, endpc, [] (char c) { return c == '"' || c == ' ' || c == '\n'; });
+        value.assign(pc, valueend);
+        pc = valueend;
+        if (*pc == '"')
+            std::advance(pc, 1);
+        pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
+        invalue = false;
+
+	return pc;
+}

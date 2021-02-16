@@ -46,6 +46,18 @@ int main() {
             std::string name(pc, endname);
             if (name == "version") {
                 inversion = true;
+            }
+            pc = endname;
+            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
+            if (*pc != ':')
+                return 1;
+            std::advance(pc, 1);
+            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
+            invalue = true;
+
+            // update counters and version
+            if (name == "version") {
+                inversion = true;
             } else {
                 ++key_count;
                 std::string name_prefix = name.substr(0, name.find('_'));
@@ -59,13 +71,6 @@ int main() {
                     ++opensuse_count;
                 }
             }
-            pc = endname;
-            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
-            if (*pc != ':')
-                return 1;
-            std::advance(pc, 1);
-            pc = std::find_if_not(pc, endpc, [] (char c) { return isspace(c); });
-            invalue = true;
         } else if (isValue(pc, invalue)) {
             // parse value
             auto endpc = buffer.cend();

@@ -10,3 +10,8 @@
 bool isKey(std::string::const_iterator pc, bool invalue);{
 	return !invalue && isalpha(*pc);
 }
+
+// YAML parsing is at a key
+bool isValue(std::string::const_iterator pc, bool invalue){
+	return invalue && (isalpha(*pc) || *pc == '"');
+}

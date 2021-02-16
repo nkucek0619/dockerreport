@@ -12,4 +12,7 @@
 // YAML parsing is at a key
 bool isKey(std::string::const_iterator pc, bool invalue);
 
+// YAML parsing is at a key
+bool isValue(std::string::const_iterator pc, bool invalue);
+
 #endif
